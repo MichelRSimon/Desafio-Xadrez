@@ -1,38 +1,57 @@
 #include <stdio.h>
 
-int main() {
-    // Movimento da Torre (5 casas para a direita) - usando FOR
-    printf("Movimento da Torre (5 casas para a direita):\n");
-    for (int i = 0; i < 5; i++) {
+// Função para movimentar a Torre
+void moverTorre(int casas) {
+    if (casas > 0) {
         printf("Direita\n");
+        moverTorre(casas - 1);
     }
+}
 
-    // Movimento do Bispo (5 casas na diagonal superior direita) - usando WHILE
-    printf("\nMovimento do Bispo (5 casas na diagonal superior direita):\n");
-    int casasBispo = 0;
-    while (casasBispo < 5) {
-        printf("Cima, Direita\n");
-        casasBispo++;
-    }
-
-    // Movimento da Rainha (8 casas para a esquerda) - usando DO-WHILE
-    printf("\nMovimento da Rainha (8 casas para a esquerda):\n");
-    int casasRainha = 0;
-    do {
+// Função para movimentar a Rainha
+void moverRainha(int casas) {
+    if (casas > 0) {
         printf("Esquerda\n");
-        casasRainha++;
-    } while (casasRainha < 8);
+        moverRainha(casas - 1);
+    }
+}
 
-    // Movimento do Cavalo (2 casas para baixo e 1 para a esquerda) - usando loops aninhados
-    printf("\nMovimento do Cavalo (2 casas para baixo e 1 para a esquerda):\n");
+// Função para movimentar o Bispo (com loop aninhado)
+void moverBispo(int vertical, int horizontal) {
+    if (vertical > 0) {
+        for (int i = 0; i < horizontal; i++) {
+            printf("Cima, Direita\n");
+        }
+        moverBispo(vertical - 1, horizontal);
+    }
+}
+
+int main() {
+    // Movimento da Torre
+    printf("Movimento da Torre (5 casas para a direita):\n");
+    moverTorre(5);
+
+    // Movimento da Rainha
+    printf("\nMovimento da Rainha (8 casas para a esquerda):\n");
+    moverRainha(8);
+
+    // Movimento do Bispo
+    printf("\nMovimento do Bispo (5 casas na diagonal superior direita):\n");
+    moverBispo(5, 1);
+
+    // Movimento do Cavalo
+    printf("\nMovimento do Cavalo (duas casas para cima e uma para a direita):\n");
     for (int i = 0; i < 2; i++) {
-        printf("Baixo\n");
+        printf("Cima\n");
     }
 
     int casasCavalo = 0;
     while (casasCavalo < 1) {
-        printf("Esquerda\n");
+        printf("Direita\n");
         casasCavalo++;
+        if (casasCavalo == 1) {
+            break;  // Interrompe o loop quando o movimento termina
+        }
     }
 
     return 0;
